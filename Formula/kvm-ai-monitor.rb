@@ -1,8 +1,8 @@
 class KvmAiMonitor < Formula
   desc "AI subscription usage wallpaper for the GL.iNet Comet Pro KVM"
   homepage "https://github.com/ivangong24/kvm_AI_monitor"
-  url "https://github.com/ivangong24/kvm_AI_monitor/archive/refs/tags/v1.4.0.tar.gz"
-  sha256 "4b29f2753dde3ced87195ede4c115ed65f3c276db9a0a2bef5e88174e74ef549"
+  url "https://github.com/ivangong24/kvm_AI_monitor/archive/refs/tags/v1.5.0.tar.gz"
+  sha256 "8b4fe182a957fca189b16c84242d0e7c17079e2a889de1cbd11650be824def55"
   license "MIT"
 
   depends_on "node"

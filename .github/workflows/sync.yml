@@ -39,8 +39,10 @@ jobs:
             -e "s|/archive/refs/tags/v[^\"]*\.tar\.gz|/archive/refs/tags/v${VERSION}.tar.gz|" \
             -e "s|sha256 \"[0-9a-f]*\"|sha256 \"${SHA}\"|" \
             Formula/kvm-ai-monitor.rb
-          # Cask installs the release's app zip via an interpolated url, so only the version changes.
-          sed -i "s|version \"[^\"]*\"|version \"${VERSION}\"|" Casks/kvm-ai-monitor.rb
+          # Cask: pull the shape from the main repo at this tag (source of truth) and pin the
+          # version, so cask edits there — not just version bumps — reach the tap automatically.
+          curl -fsSL "https://raw.githubusercontent.com/ivangong24/kvm_AI_monitor/v${VERSION}/packaging/homebrew/Casks/kvm-ai-monitor.rb" \
+            | sed "s|version \"[^\"]*\"|version \"${VERSION}\"|" > Casks/kvm-ai-monitor.rb
       - name: Commit if anything changed
         env:
           VERSION: ${{ steps.rel.outputs.version }}

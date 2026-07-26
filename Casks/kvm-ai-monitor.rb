@@ -7,7 +7,7 @@ cask "kvm-ai-monitor" do
   desc "Menu bar companion for the GL.iNet Comet Pro AI usage dashboard"
   homepage "https://github.com/ivangong24/kvm_AI_monitor"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "KVM AI Monitor.app"
 

@@ -19,8 +19,12 @@ jobs:
       - uses: actions/checkout@v7
       - name: Read the latest upstream release
         id: rel
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tag="$(curl -fsSL https://api.github.com/repos/ivangong24/kvm_AI_monitor/releases/latest | jq -r .tag_name)"
+          # Authenticated so scheduled runs don't hit the 60/hr unauthenticated API rate limit (403).
+          tag="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/ivangong24/kvm_AI_monitor/releases/latest | jq -r .tag_name)"
           if [ -z "$tag" ] || [ "$tag" = "null" ]; then
             echo "Could not read the latest release tag." >&2
             exit 1
